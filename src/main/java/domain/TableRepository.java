@@ -6,6 +6,7 @@ import java.util.List;
 
 public class TableRepository {
     private static final List<Table> tables = new ArrayList<>();
+    private static final String ERROR_MESSAGE_TABLE_NUMBER = "없는 테이블입니다";
 
     static {
         tables.add(new Table(1));
@@ -21,6 +22,11 @@ public class TableRepository {
     }
 
     public static Table findByTableNumber(final int tableNumber) {
-        return tables.get(1);
+        return tables.stream()
+                .filter(table -> table.isMatchNumber(tableNumber))
+                .findAny()
+                .orElseThrow(() -> {
+                    throw new IllegalArgumentException(ERROR_MESSAGE_TABLE_NUMBER);
+                });
     }
 }
