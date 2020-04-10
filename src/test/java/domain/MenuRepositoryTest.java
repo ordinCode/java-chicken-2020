@@ -15,4 +15,16 @@ class MenuRepositoryTest {
 		assertThat(MenuRepository.findByMenuNumber(number).getName())
 				.isEqualTo(menuName);
 	}
+
+	@DisplayName("메뉴번호로 메뉴가져오기 - 없는 메뉴 번호")
+	@Test
+	void findByMenuNumberWithError() {
+		int number = 10;
+
+		assertThatThrownBy(() -> MenuRepository.findByMenuNumber(number))
+				.isInstanceOf(IllegalArgumentException.class)
+				.hasMessage("없는 메뉴입니다");
+	}
+
+
 }

@@ -16,6 +16,22 @@ class OrderTest {
 		chicken = MenuRepository.findByMenuNumber(1);
 	}
 
+	@DisplayName("수량 0 입력")
+	@Test
+	void create() {
+		assertThatThrownBy(() -> new Order(table1, chicken, 0))
+				.isInstanceOf(IllegalArgumentException.class)
+				.hasMessage("1 ~ 99 사이의 숫자를 입력하세요");
+	}
+
+	@DisplayName("수량 100 입력")
+	@Test
+	void create2() {
+		assertThatThrownBy(() -> new Order(table1, chicken, 100))
+				.isInstanceOf(IllegalArgumentException.class)
+				.hasMessage("1 ~ 99 사이의 숫자를 입력하세요");
+	}
+
 	@DisplayName("테이블번호비교")
 	@Test
 	void isMatchTableNumber() {
