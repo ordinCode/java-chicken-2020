@@ -73,7 +73,7 @@ public class InputView {
 		System.out.println(String.format(INPUT_MESSAGE_PAYMENT_FORM, tableNumber));
 		int inputNumber = inputNumber();
 		validateInputFormOfPayment(inputNumber);
-		return inputNumber();
+		return inputNumber;
 	}
 
 	private static void validateInputFormOfPayment(final int inputNumber) {

@@ -61,6 +61,8 @@ public class ChickenController {
 
 		Price price = new Price(OrdersOfTable, formOfPayment);
 		OutputView.printFinalPrice(price.getPrice());
+
+		totalOrders.removeIf(order -> order.isMatchTableNumber(tableNumber));
 	}
 
 	public static boolean isNotExit(final int userInput) {
