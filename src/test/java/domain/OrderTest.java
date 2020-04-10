@@ -16,6 +16,7 @@ class OrderTest {
 		assertThat(order.isMatchTableNumber(tableNumber)).isTrue();
 	}
 
+	@DisplayName("주문내역 출력 테스트")
 	@Test
 	void toStringTest() {
 		Order order = new Order(1, 1, 2);

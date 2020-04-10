@@ -5,7 +5,6 @@ import domain.Order;
 import domain.Table;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class OutputView {
     private static final String TOP_LINE = "┌ ─ ┐";
@@ -41,10 +40,7 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printOrderList(final List<Order> orders, final int tableNumber) {
-        List<Order> tableOrders = orders.stream()
-                .filter(order -> order.isMatchTableNumber(tableNumber))
-                .collect(Collectors.toList());
+    public static void printOrderList(final List<Order> tableOrders) {
         System.out.println(MESSAGE_BILL_ITEM);
         System.out.println(OrderList(tableOrders));
     }

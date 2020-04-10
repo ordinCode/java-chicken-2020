@@ -19,4 +19,16 @@ public class Order {
 	public String toString() {
 		return menu.getName() + " " + count + " " + menu.getPrice();
 	}
+
+	public int getPrice() {
+		return menu.getPrice() * count;
+	}
+
+	public Category getCategory() {
+		return menu.getCategory();
+	}
+
+	public int getCount() {
+		return count;
+	}
 }

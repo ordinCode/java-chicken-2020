@@ -47,4 +47,10 @@ public class InputView {
 			throw new IllegalArgumentException(ERROR_MESSAGE_NOT_INTEGER);
 		}
 	}
+
+	public static int inputFormOfPayment(final int tableNumber) {
+		System.out.println(String.format("## %d번 테이블의 결제를 진행합니다.\n신용카드는 1번, 현금은 2번",
+				tableNumber));
+		return inputNumber();
+	}
 }

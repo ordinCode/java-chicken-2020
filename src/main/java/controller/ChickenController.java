@@ -3,6 +3,7 @@ package controller;
 import domain.Menu;
 import domain.MenuRepository;
 import domain.Order;
+import domain.Price;
 import domain.Table;
 import domain.TableRepository;
 import view.InputView;
@@ -10,6 +11,7 @@ import view.OutputView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ChickenController {
 	private static final int FUNCTION_NUMBER_REGISTER_ORDER = 1;
@@ -35,8 +37,14 @@ public class ChickenController {
 	private static void pay(final List<Order> orders, final List<Table> tables) {
 		OutputView.printTables(tables);
 		int tableNumber = InputView.inputTableNumberWhenPay();
-		OutputView.printOrderList(orders, tableNumber);
+		List<Order> tableOrders = orders.stream()
+				.filter(order -> order.isMatchTableNumber(tableNumber))
+				.collect(Collectors.toList());
+		OutputView.printOrderList(tableOrders);
 
+		int formOfPayment = InputView.inputFormOfPayment(tableNumber);
+
+		Price price = new Price(tableOrders, formOfPayment);
 	}
 
 	private static void registerOrder(List<Order> orders, final List<Table> tables) {
