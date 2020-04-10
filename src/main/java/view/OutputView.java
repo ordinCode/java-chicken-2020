@@ -14,7 +14,7 @@ public class OutputView {
 	private static final String BOTTOM_LINE = "└ ─ ┘";
 	private static final String BOTTOM_LINE_ORDERED = "└ ₩ ┘";
 	private static final String MESSAGE_BILL_ITEM = "메뉴   수량   금액";
-	private static final String STRING_FORMAT_FINAL_PRICE = "## 최종 결제 금액 : %.1f";
+	private static final String STRING_FORMAT_FINAL_PRICE = "## 최종 결제 금액 : %.1f\n";
 	private static final String SEPARATE_LINE = "\n";
 
 	public static void printTables(final List<Table> tables, Orders orders) {
