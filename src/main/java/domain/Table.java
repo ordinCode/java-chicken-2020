@@ -12,7 +12,6 @@ public class Table {
         return Integer.toString(number);
     }
 
-
     public boolean isMatchNumber(final int number) {
         return this.number == number;
     }

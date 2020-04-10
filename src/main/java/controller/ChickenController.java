@@ -37,7 +37,7 @@ public class ChickenController {
 	}
 
 	private static void registerOrder(List<Order> orders, final List<Table> tables) {
-		OutputView.printTables(tables);
+		OutputView.printTables(tables, orders);
 
 		final Table table = TableRepository.findByTableNumber(InputView.inputTableNumber());
 
@@ -49,7 +49,7 @@ public class ChickenController {
 	}
 
 	private static void pay(final List<Order> totalOrders, final List<Table> tables) {
-		OutputView.printTables(tables);
+		OutputView.printTables(tables, totalOrders);
 		int tableNumber = InputView.inputTableNumberWhenPay();
 
 		List<Order> OrdersOfTable = totalOrders.stream()

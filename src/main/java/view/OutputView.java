@@ -5,28 +5,24 @@ import domain.Order;
 import domain.Table;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OutputView {
 	private static final String TABLE_LIST_HEAD = "## 테이블 목록";
 	private static final String TOP_LINE = "┌ ─ ┐";
 	private static final String TABLE_FORMAT = "| %s |";
 	private static final String BOTTOM_LINE = "└ ─ ┘";
+	private static final String BOTTOM_LINE_ORDERED = "└ ₩ ┘";
 	private static final String MESSAGE_BILL_ITEM = "메뉴   수량   금액";
 	private static final String STRING_FORMAT_FINAL_PRICE = "## 최종 결제 금액 : %.1f";
 	private static final String SEPARATE_LINE = "\n";
 
-	public static void printTables(final List<Table> tables) {
+	public static void printTables(final List<Table> tables, List<Order> orders) {
 		System.out.println(TABLE_LIST_HEAD);
 		final int size = tables.size();
 		printLine(TOP_LINE, size);
 		printTableNumbers(tables);
-		printLine(BOTTOM_LINE, size);
-	}
-
-	public static void printMenus(final List<Menu> menus) {
-		for (final Menu menu : menus) {
-			System.out.println(menu);
-		}
+		printBottom(tables, orders);
 	}
 
 	private static void printLine(final String line, final int count) {
@@ -43,6 +39,28 @@ public class OutputView {
 		System.out.println();
 	}
 
+	private static void printBottom(final List<Table> tables, final List<Order> orders) {
+		List<Table> orderTable = orders.stream()
+				.map(Order::getTable)
+				.collect(Collectors.toList());
+
+		for (Table table : tables) {
+			if (orderTable.contains(table)) {
+				System.out.print(BOTTOM_LINE_ORDERED);
+				continue;
+			}
+			System.out.print(BOTTOM_LINE);
+		}
+
+		System.out.println();
+	}
+
+	public static void printMenus(final List<Menu> menus) {
+		for (final Menu menu : menus) {
+			System.out.println(menu);
+		}
+	}
+
 	public static void printOrderList(final List<Order> tableOrders) {
 		System.out.println(MESSAGE_BILL_ITEM);
 		System.out.println(OrderList(tableOrders));
@@ -57,6 +75,6 @@ public class OutputView {
 	}
 
 	public static void printFinalPrice(final double price) {
-		System.out.println(String.format(STRING_FORMAT_FINAL_PRICE, price));
+		System.out.printf(STRING_FORMAT_FINAL_PRICE, price);
 	}
 }

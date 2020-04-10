@@ -31,4 +31,8 @@ public class Order {
 	public int getCount() {
 		return count;
 	}
+
+	public Table getTable() {
+		return this.table;
+	}
 }
