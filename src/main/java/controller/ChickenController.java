@@ -39,6 +39,11 @@ public class ChickenController {
 
 		final List<Menu> menus = MenuRepository.menus();
 		OutputView.printMenus(menus);
+
+		final String menuNumber = InputView.inputMenu();
+		final String menuCount = InputView.inputCount();
+
+
 	}
 
 	public static boolean isNotExit(final String userInput) {
