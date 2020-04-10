@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class MenuRepository {
-    private static final String ERROR_MESSAGE_TABLE_NUMBER = "없는 테이블입니다";
+    private static final String ERROR_MESSAGE_TABLE_NUMBER = "없는 메뉴입니다";
 
     private static final List<Menu> menus = new ArrayList<>();
 

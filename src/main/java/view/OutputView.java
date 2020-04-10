@@ -2,10 +2,10 @@ package view;
 
 import domain.Menu;
 import domain.Order;
+import domain.Orders;
 import domain.Table;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class OutputView {
 	private static final String TABLE_LIST_HEAD = "## 테이블 목록";
@@ -17,7 +17,7 @@ public class OutputView {
 	private static final String STRING_FORMAT_FINAL_PRICE = "## 최종 결제 금액 : %.1f";
 	private static final String SEPARATE_LINE = "\n";
 
-	public static void printTables(final List<Table> tables, List<Order> orders) {
+	public static void printTables(final List<Table> tables, Orders orders) {
 		System.out.println(TABLE_LIST_HEAD);
 		final int size = tables.size();
 		printLine(TOP_LINE, size);
@@ -39,20 +39,19 @@ public class OutputView {
 		System.out.println();
 	}
 
-	private static void printBottom(final List<Table> tables, final List<Order> orders) {
-		List<Table> orderTable = orders.stream()
-				.map(Order::getTable)
-				.collect(Collectors.toList());
-
+	private static void printBottom(final List<Table> tables, final Orders orders) {
 		for (Table table : tables) {
-			if (orderTable.contains(table)) {
-				System.out.print(BOTTOM_LINE_ORDERED);
-				continue;
-			}
-			System.out.print(BOTTOM_LINE);
+			printBottomLine(orders, table);
 		}
-
 		System.out.println();
+	}
+
+	private static void printBottomLine(final Orders orders, final Table table) {
+		if (orders.contains(table)) {
+			System.out.print(BOTTOM_LINE_ORDERED);
+			return;
+		}
+		System.out.print(BOTTOM_LINE);
 	}
 
 	public static void printMenus(final List<Menu> menus) {

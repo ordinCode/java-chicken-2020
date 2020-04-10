@@ -35,4 +35,8 @@ public class Order {
 	public Table getTable() {
 		return this.table;
 	}
+
+	public boolean isMatchTable(final Table table) {
+		return this.table.equals(table);
+	}
 }
