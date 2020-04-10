@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class MenuRepository {
+    private static final String ERROR_MESSAGE_TABLE_NUMBER = "없는 테이블입니다";
+
     private static final List<Menu> menus = new ArrayList<>();
 
     static {
@@ -20,5 +22,14 @@ public class MenuRepository {
 
     public static List<Menu> menus() {
         return Collections.unmodifiableList(menus);
+    }
+
+    public static Menu findByMenuNumber(final int menuNumber) {
+        return menus.stream()
+                .filter(menu -> menu.isMatchNumber(menuNumber))
+                .findAny()
+                .orElseThrow(() -> {
+                    throw new IllegalArgumentException(ERROR_MESSAGE_TABLE_NUMBER);
+                });
     }
 }
