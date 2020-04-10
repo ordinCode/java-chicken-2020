@@ -5,9 +5,9 @@ public class Order {
 	private final Menu menu;
 	private final int count;
 
-	public Order(final int tableNumber, final int menuNumber, final int count) {
-		this.table = TableRepository.findByTableNumber(tableNumber);
-		this.menu = MenuRepository.findByMenuNumber(menuNumber);
+	public Order(final Table table, final Menu menu, final int count) {
+		this.table = table;
+		this.menu = menu;
 		this.count = count;
 	}
 
