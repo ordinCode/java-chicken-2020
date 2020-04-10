@@ -10,17 +10,17 @@ import view.OutputView;
 import java.util.List;
 
 public class ChickenController {
-	private static final String EXIT_FUNCTION_NUMBER = "3";
-	private static final String REGISTER_ORDER_FUNCTION_NUMBER = "1";
-	private static final String PAY_FUNCTION_ORDER = "2";
+	private static final int FUNCTION_NUMBER_REGISTER_ORDER = 1;
+	private static final int FUNCTION_ORDER_PAY = 2;
+	private static final int FUNCTION_NUMBER_EXIT = 3;
 
 	public static void run() {
-		String userInput = InputView.inputAction();
+		int userInput = InputView.inputAction();
 		while (isNotExit(userInput)) {
-			if (userInput.equals(REGISTER_ORDER_FUNCTION_NUMBER)) {
+			if (userInput == FUNCTION_NUMBER_REGISTER_ORDER) {
 				registerOrder();
 			}
-			if (userInput.equals(PAY_FUNCTION_ORDER)) {
+			if (userInput == FUNCTION_ORDER_PAY) {
 				pay();
 			}
 			userInput = InputView.inputAction();
@@ -35,18 +35,16 @@ public class ChickenController {
 		final List<Table> tables = TableRepository.tables();
 		OutputView.printTables(tables);
 
-		final String tableNumber = InputView.inputTableNumber();
+		final int tableNumber = InputView.inputTableNumber();
 
 		final List<Menu> menus = MenuRepository.menus();
 		OutputView.printMenus(menus);
 
-		final String menuNumber = InputView.inputMenu();
-		final String menuCount = InputView.inputCount();
-
-
+		final int menuNumber = InputView.inputMenu();
+		final int menuCount = InputView.inputCount();
 	}
 
-	public static boolean isNotExit(final String userInput) {
-		return !EXIT_FUNCTION_NUMBER.equals(userInput);
+	public static boolean isNotExit(final int userInput) {
+		return FUNCTION_NUMBER_EXIT != userInput;
 	}
 }
