@@ -10,4 +10,13 @@ public class Order {
 		this.menu = MenuRepository.findByMenuNumber(menuNumber);
 		this.count = count;
 	}
+
+	public boolean isMatchTableNumber(final int tableNumber) {
+		return table.isMatchNumber(tableNumber);
+	}
+
+	@Override
+	public String toString() {
+		return menu.getName() + " " + count + " " + menu.getPrice();
+	}
 }
