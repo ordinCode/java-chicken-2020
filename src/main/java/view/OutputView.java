@@ -76,4 +76,8 @@ public class OutputView {
 	public static void printFinalPrice(final double price) {
 		System.out.printf(STRING_FORMAT_FINAL_PRICE, price);
 	}
+
+	public static void printExitMessage() {
+		System.out.println("프로그램을 종료합니다");
+	}
 }

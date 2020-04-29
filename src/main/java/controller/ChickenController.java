@@ -1,5 +1,6 @@
 package controller;
 
+import domain.ChickenFunction;
 import domain.Menu;
 import domain.MenuRepository;
 import domain.Order;
@@ -10,28 +11,26 @@ import domain.TableRepository;
 import view.InputView;
 import view.OutputView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ChickenController {
-	private static final int FUNCTION_NUMBER_REGISTER_ORDER = 1;
-	private static final int FUNCTION_ORDER_PAY = 2;
-	private static final int FUNCTION_NUMBER_EXIT = 3;
+	private static Map<Integer, ChickenFunction<Orders, List>> functions = new HashMap<>();
+
+	static {
+		functions.put(1, (ChickenController::registerOrder));
+		functions.put(2, (ChickenController::pay));
+		functions.put(3, (ChickenController::exit));
+	}
 
 	final static List<Menu> menus = MenuRepository.menus();
 
 	public static void run() {
 		final List<Table> tables = TableRepository.tables();
 		Orders orders = new Orders();
-
-		int userInput = InputView.inputAction();
-		while (isNotExit(userInput)) {
-			if (userInput == FUNCTION_NUMBER_REGISTER_ORDER) {
-				registerOrder(orders, tables);
-			}
-			if (userInput == FUNCTION_ORDER_PAY) {
-				pay(orders, tables);
-			}
-			userInput = InputView.inputAction();
+		while (true) {
+			functions.get(InputView.inputAction()).run(orders, tables);
 		}
 	}
 
@@ -64,7 +63,8 @@ public class ChickenController {
 		Orders.remove(tableNumber);
 	}
 
-	public static boolean isNotExit(final int userInput) {
-		return FUNCTION_NUMBER_EXIT != userInput;
+	private static void exit(final Orders orders, final List list) {
+		OutputView.printExitMessage();
+		System.exit(0);
 	}
 }
